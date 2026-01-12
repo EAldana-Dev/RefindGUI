@@ -43,6 +43,11 @@ public class Sign extends javax.swing.JFrame {
 
         SignButton.setFont(new java.awt.Font("Adwaita Sans", 0, 24)); // NOI18N
         SignButton.setText("REGISTRARSE");
+        SignButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SignButtonActionPerformed(evt);
+            }
+        });
 
         LogButton.setFont(new java.awt.Font("Adwaita Sans", 0, 24)); // NOI18N
         LogButton.setText("INICIAR SESIÓN");
@@ -54,24 +59,24 @@ public class Sign extends javax.swing.JFrame {
             .addGroup(signMenuPanelLayout.createSequentialGroup()
                 .addGroup(signMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(signMenuPanelLayout.createSequentialGroup()
-                        .addGap(378, 378, 378)
-                        .addComponent(jLabel1))
-                    .addGroup(signMenuPanelLayout.createSequentialGroup()
-                        .addGap(210, 210, 210)
+                        .addGap(263, 263, 263)
                         .addComponent(SignButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(114, 114, 114)
-                        .addComponent(LogButton)))
-                .addContainerGap(343, Short.MAX_VALUE))
+                        .addGap(125, 125, 125)
+                        .addComponent(LogButton))
+                    .addGroup(signMenuPanelLayout.createSequentialGroup()
+                        .addGap(443, 443, 443)
+                        .addComponent(jLabel1)))
+                .addContainerGap(279, Short.MAX_VALUE))
         );
         signMenuPanelLayout.setVerticalGroup(
             signMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, signMenuPanelLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(27, 27, 27)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 262, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 259, Short.MAX_VALUE)
                 .addGroup(signMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(SignButton)
-                    .addComponent(LogButton))
+                    .addComponent(LogButton)
+                    .addComponent(SignButton))
                 .addGap(235, 235, 235))
         );
 
@@ -92,6 +97,14 @@ public class Sign extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void SignButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignButtonActionPerformed
+        // TODO add your handling code here:
+        
+        SignUp signUp = new SignUp();
+        signUp.setLocationRelativeTo(this);
+        signUp.setVisible(true);
+    }//GEN-LAST:event_SignButtonActionPerformed
 
     /**
      * @param args the command line arguments

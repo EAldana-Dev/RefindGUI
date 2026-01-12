@@ -5,6 +5,7 @@ package com.mycompany.refindgui;
  *
  * @author salchi
  */
+
 public class RefindGUI {
 
     public static void main(String[] args) {
