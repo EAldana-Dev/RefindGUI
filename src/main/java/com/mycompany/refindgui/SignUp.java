@@ -6,10 +6,10 @@
 
 package com.mycompany.refindgui;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Base64;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,6 +24,9 @@ public class SignUp extends javax.swing.JFrame {
      */
     public SignUp() {
         initComponents();
+        
+        CancelButton.setFocusPainted(false);
+        CreateButton.setFocusPainted(false);
     }
 
     /**
@@ -40,8 +43,8 @@ public class SignUp extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        CreateButton = new javax.swing.JButton();
+        CancelButton = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         nameField = new javax.swing.JTextField();
         userField = new javax.swing.JTextField();
@@ -65,19 +68,19 @@ public class SignUp extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Adwaita Sans", 0, 24)); // NOI18N
         jLabel5.setText("Contraseña");
 
-        jButton1.setFont(new java.awt.Font("Adwaita Sans", 0, 24)); // NOI18N
-        jButton1.setText("Crear");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        CreateButton.setFont(new java.awt.Font("Adwaita Sans", 0, 24)); // NOI18N
+        CreateButton.setText("Crear");
+        CreateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                CreateButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Adwaita Sans", 0, 24)); // NOI18N
-        jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        CancelButton.setFont(new java.awt.Font("Adwaita Sans", 0, 24)); // NOI18N
+        CancelButton.setText("Cancelar");
+        CancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                CancelButtonActionPerformed(evt);
             }
         });
 
@@ -130,9 +133,9 @@ public class SignUp extends javax.swing.JFrame {
                 .addContainerGap(147, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(CreateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(66, 66, 66)
-                .addComponent(jButton2)
+                .addComponent(CancelButton)
                 .addGap(160, 160, 160))
         );
         layout.setVerticalGroup(
@@ -159,8 +162,8 @@ public class SignUp extends javax.swing.JFrame {
                     .addComponent(passField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(CreateButton)
+                    .addComponent(CancelButton))
                 .addGap(46, 46, 46))
         );
 
@@ -171,32 +174,39 @@ public class SignUp extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_nameFieldActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void CreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateButtonActionPerformed
         // TODO add your handling code here:
-        
-        try(BufferedWriter userWriter = new BufferedWriter(new FileWriter("usersFile.txt", true)))
+        if(!nameField.getText().isEmpty() && !userField.getText().isEmpty() && !groupField.getText().isEmpty() && !passField.getText().isEmpty())
         {
+            try(BufferedWriter userWriter = new BufferedWriter(new FileWriter("usersFile.txt", true)))
+            {
             
-            Base64.Encoder encoder = Base64.getEncoder();
-            String encodedName = new String (encoder.encode(nameField.getText().getBytes()));
-            String encodedUser = new String (encoder.encode(userField.getText().getBytes()));
-            String encodedGroup = new String (encoder.encode(groupField.getText().getBytes()));
-            String encodedPass = new String (encoder.encode(passField.getText().getBytes()));
+                Base64.Encoder encoder = Base64.getEncoder();
+                String encodedName = new String (encoder.encode(nameField.getText().getBytes()));
+                String encodedUser = new String (encoder.encode(userField.getText().getBytes()));
+                String encodedGroup = new String (encoder.encode(groupField.getText().getBytes()));
+                String encodedPass = new String (encoder.encode(passField.getText().getBytes()));
             
             userWriter.write(encodedName + "|" + encodedUser + "|" + encodedGroup + "|" + encodedPass);
             userWriter.newLine();
             
-        }catch(IOException e){
+            }catch(IOException e){
             
+            }
+        
+            this.dispose();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "No dejes campos vacíos", "", JOptionPane.WARNING_MESSAGE);
         }
         
-        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_CreateButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_CancelButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -224,9 +234,9 @@ public class SignUp extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CancelButton;
+    private javax.swing.JButton CreateButton;
     private javax.swing.JTextField groupField;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
